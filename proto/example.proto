@@ -1,0 +1,41 @@
+syntax = "proto3";
+
+// Go gRPC Example
+//
+// This example is used to show how to use gRPC and
+// gRPC-Gateway with Go Protobuf.
+package example;
+
+import "google/api/annotations.proto";
+import "protoc-gen-swagger/options/annotations.proto";
+//import "github.com/mwitkow/go-proto-validators/validator.proto";
+
+option go_package = "github.com/kraymond37/go-grpc-example/proto";
+
+option (grpc.gateway.protoc_gen_swagger.options.openapiv2_swagger) = {
+  info: {
+    version: "1.0";
+  };
+  external_docs: {
+    url: "https://github.com/kraymond37/go-grpc-example";
+    description: "gRPC example repository";
+  }
+  schemes: HTTP;
+};
+
+service Example {
+  rpc SayHello(HelloRequest) returns (HelloReply) {
+    option (google.api.http) = {
+      post: "/api/v1/hello"
+      body: "*"
+    };
+  }
+}
+
+message HelloRequest {
+  string name = 1;
+}
+
+message HelloReply {
+  string message = 1;
+}
