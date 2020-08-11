@@ -82,7 +82,7 @@ func startSwagger() {
 	gatewayAddr := fmt.Sprintf("localhost:%v", gatewayPort)
 	log.Info("Serving gRPC-Gateway on http://", gatewayAddr)
 	log.Info("Serving OpenAPI Documentation on http://", gatewayAddr, prefix)
-	log.Fatalln(http.ListenAndServe(":20000", mux))
+	log.Fatalln(http.ListenAndServe(gatewayAddr, mux))
 }
 
 func main() {
